@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
         return Inertia::render('Posts/Index', [
             'posts' => Post::orderBy('created_at', 'desc')->get()
