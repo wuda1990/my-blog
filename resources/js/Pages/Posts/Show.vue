@@ -10,7 +10,7 @@
                 <span>·</span>
                 <span>{{ new Date(post.created_at).toLocaleDateString() }}</span>
             </div>
-            <article class="prose max-w-none text-gray-800">
+            <article class="prose max-w-none text-gray-800 whitespace-normal break-words">
                 {{ post.content }}
             </article>
             <div class="mt-8 flex gap-4">
