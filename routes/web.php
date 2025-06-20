@@ -16,6 +16,9 @@ Route::get('/', function () {
     return redirect()->route('posts.index');
 });
 Route::resource('posts', PostController::class);
+Route::post("comments", [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
+Route::put("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'update'])->name('comments.update');
+Route::delete("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
