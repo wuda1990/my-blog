@@ -11,14 +11,14 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,Authenticatable $user)
+    public function store(Request $request)
     {
         $data = $request->validate([
             'post_id' => 'required|integer|exists:posts,id',
             'content' => 'required|string|max:1000',
         ]);
 
-        $data['author'] = $user->getAuthIdentifierName();
+        $data['user_id'] = auth()->id();
 
         Comment::create($data);
 
@@ -31,9 +31,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment, Authenticatable $user)
     {
         //
-        if ($comment->author !== $user->getAuthIdentifierName()) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorize('update', $comment);
         $data = $request->validate([
             'content' => 'required|string|max:1000',
         ]);
@@ -46,9 +44,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment,Authenticatable $user)
     {
-        if ($comment->author !== $user->getAuthIdentifierName()) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorize('delete', $comment);
         $comment->delete();
         return redirect()->back();
     }

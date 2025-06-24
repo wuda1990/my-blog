@@ -25,17 +25,17 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',
-            'author' => 'required|string|max:100',
         ]);
+        $validated['user_id'] = auth()->id();
         Post::create($validated);
         return redirect()->route('posts.index');
     }
 
     public function show(Post $post)
     {
-        $post.load('comments'); // Eager load comments for the post
+        $post = Post::with('comments.user')->findOrFail($post->id);
         return Inertia::render('Posts/Show', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 
@@ -51,8 +51,8 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',
-            'author' => 'required|string|max:100',
         ]);
+        $validated['user_id'] = auth()->id();
         $post->update($validated);
         return redirect()->route('posts.index');
     }
