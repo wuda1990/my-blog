@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('Posts/Index', [
-            'posts' => Post::orderBy('created_at', 'desc')->get()
+            'posts' => Post::orderBy('created_at', 'desc')->with('user')->get()
         ]);
     }
 
@@ -24,6 +24,7 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
             'content' => 'required',
         ]);
         $validated['user_id'] = auth()->id();
@@ -50,6 +51,7 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
             'content' => 'required',
         ]);
         $validated['user_id'] = auth()->id();

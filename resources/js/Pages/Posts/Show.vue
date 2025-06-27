@@ -7,7 +7,8 @@
                 <Link :href="route('posts.index')" class="text-gray-500 hover:text-gray-900 underline text-sm">返回</Link>
             </div>
             <div class="mb-5 text-gray-400 text-sm flex items-center gap-4">
-                <span>作者：{{ post.user.name }}</span>
+                <span>作者：{{ post.author }}</span>
+                <span>发布者：{{ post.user.name }}</span>
                 <span>·</span>
                 <span>{{ new Date(post.created_at).toLocaleDateString() }}</span>
             </div>

@@ -36,9 +36,9 @@
                             >
                                 {{ post.title }}
                             </Link>
-                            <span class="ml-3 text-xs text-gray-500">by {{ post.author }}</span>
+                            <span class="ml-3 text-xs text-gray-500">by {{ post.user.name }}</span>
                         </div>
-                        <div class="flex gap-2">
+                        <div v-if="user && post.user && user.id === post.user.id" class="flex gap-2">
                             <Link
                                 :href="route('posts.edit', post.id)"
                                 class="inline-flex items-center px-3 py-1 text-xs font-medium border border-gray-300 rounded hover:bg-gray-100 text-gray-700"
@@ -60,8 +60,10 @@
 </template>
 
 <script setup>
-import { Link, router } from '@inertiajs/vue3'
+import { Link, router,usePage } from '@inertiajs/vue3'
 defineProps({ posts: Array })
+
+const user = usePage().props.auth?.user
 
 function deletePost(id) {
     if (confirm('确定要删除这篇文章吗？')) {
