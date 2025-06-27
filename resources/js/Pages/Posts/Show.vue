@@ -7,14 +7,14 @@
                 <Link :href="route('posts.index')" class="text-gray-500 hover:text-gray-900 underline text-sm">返回</Link>
             </div>
             <div class="mb-5 text-gray-400 text-sm flex items-center gap-4">
-                <span>作者：{{ post.author }}</span>
+                <span>作者：{{ post.user.name }}</span>
                 <span>·</span>
                 <span>{{ new Date(post.created_at).toLocaleDateString() }}</span>
             </div>
             <article class="prose max-w-none text-gray-800">
                 {{ post.content }}
             </article>
-            <div class="mt-8 flex gap-4">
+            <div v-if="user && post.user && user.id === post.user.id" class="mt-8 flex gap-4">
                 <Link
                     :href="route('posts.edit', post.id)"
                     class="inline-flex items-center px-4 py-1.5 bg-gray-50 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition text-sm font-medium"

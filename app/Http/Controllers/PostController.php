@@ -33,7 +33,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $post = Post::with('comments.user')->findOrFail($post->id);
+        $post = Post::with('comments.user')->with('user')->findOrFail($post->id);
         return Inertia::render('Posts/Show', [
             'post' => $post,
         ]);
