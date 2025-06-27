@@ -51,6 +51,15 @@
                                 >删除</button>
                             </form>
                         </div>
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-700 text-sm mb-1" v-if="post.comments && post.comments.length">最新评论</h3>
+                            <ul v-if="post.comments && post.comments.length">
+                                <li v-for="comment in post.comments" :key="comment.id" class="text-xs text-gray-600 border-b last:border-b-0 py-1">
+                                    <span class="font-semibold">{{ comment.user?.name || '匿名' }}</span>：
+                                    <span>{{ comment.content }}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
                 <li v-if="!posts.length" class="text-center text-gray-400 py-16">还没有文章，快来发布第一篇吧！</li>

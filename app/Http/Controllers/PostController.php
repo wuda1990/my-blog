@@ -11,7 +11,12 @@ class PostController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('Posts/Index', [
-            'posts' => Post::orderBy('created_at', 'desc')->with('user')->get()
+            'posts' => Post::orderBy('created_at', 'desc')
+                ->with('user')
+                ->with(['comments' => function ($query) {
+                    $query->latest()->with('user')->limit(5);
+                }])
+                ->get()
         ]);
     }
 
