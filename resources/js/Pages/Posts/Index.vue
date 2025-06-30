@@ -51,15 +51,32 @@
                                 >删除</button>
                             </form>
                         </div>
-                        <div class="mt-3">
-                            <h3 class="font-semibold text-gray-700 text-sm mb-1" v-if="post.comments && post.comments.length">最新评论</h3>
-                            <ul v-if="post.comments && post.comments.length">
-                                <li v-for="comment in post.comments" :key="comment.id" class="text-xs text-gray-600 border-b last:border-b-0 py-1">
-                                    <span class="font-semibold">{{ comment.user?.name || '匿名' }}</span>：
-                                    <span>{{ comment.content }}</span>
-                                </li>
-                            </ul>
-                        </div>
+                    </div>
+                    <!-- Reddit-style comment section inside your <li v-for="post in posts" ...> -->
+                    <div class="mt-3" v-if="post.comments && post.comments.length">
+                        <h3 class="font-semibold text-gray-700 text-sm mb-1">最新评论</h3>
+                        <ul>
+                            <li
+                                v-for="comment in post.comments"
+                                :key="comment.id"
+                                class="bg-gray-50 border border-gray-200 rounded-md p-3 mb-2 flex items-start gap-3"
+                            >
+                                <div class="flex-shrink-0 mt-1">
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="font-bold text-gray-900 text-xs">{{ comment.user?.name || '匿名' }}</span>
+                                        <span class="text-gray-400 text-xs">· {{ new Date(comment.created_at).toLocaleString() }}</span>
+                                    </div>
+                                    <div class="text-gray-800 text-sm">
+                                        {{ comment.content }}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </li>
                 <li v-if="!posts.length" class="text-center text-gray-400 py-16">还没有文章，快来发布第一篇吧！</li>
@@ -69,7 +86,7 @@
 </template>
 
 <script setup>
-import { Link, router,usePage } from '@inertiajs/vue3'
+import { Link, router, usePage } from '@inertiajs/vue3'
 defineProps({ posts: Array })
 
 const user = usePage().props.auth?.user
