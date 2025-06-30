@@ -13,7 +13,7 @@
                 <span>{{ new Date(post.created_at).toLocaleDateString() }}</span>
             </div>
             <article class="prose max-w-none text-gray-800">
-                {{ post.content }}
+               <pre>{{post.content}}</pre>
             </article>
             <div v-if="user && post.user && user.id === post.user.id" class="mt-8 flex gap-4">
                 <Link

@@ -7,7 +7,7 @@
                     <svg class="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
                     </svg>
-                    博客文章
+                    熊猫韵律
                 </h1>
                 <Link
                     :href="route('posts.create')"
@@ -52,32 +52,9 @@
                             </form>
                         </div>
                     </div>
-                    <!-- Reddit-style comment section inside your <li v-for="post in posts" ...> -->
-                    <div class="mt-3" v-if="post.comments && post.comments.length">
-                        <h3 class="font-semibold text-gray-700 text-sm mb-1">最新评论</h3>
-                        <ul>
-                            <li
-                                v-for="comment in post.comments"
-                                :key="comment.id"
-                                class="bg-gray-50 border border-gray-200 rounded-md p-3 mb-2 flex items-start gap-3"
-                            >
-                                <div class="flex-shrink-0 mt-1">
-                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="10"/>
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="font-bold text-gray-900 text-xs">{{ comment.user?.name || '匿名' }}</span>
-                                        <span class="text-gray-400 text-xs">· {{ new Date(comment.created_at).toLocaleString() }}</span>
-                                    </div>
-                                    <div class="text-gray-800 text-sm">
-                                        {{ comment.content }}
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <article class="prose max-w-none text-gray-800">
+                        <pre>{{post.content}}</pre>
+                    </article>
                 </li>
                 <li v-if="!posts.length" class="text-center text-gray-400 py-16">还没有文章，快来发布第一篇吧！</li>
             </ul>
