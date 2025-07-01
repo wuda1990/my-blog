@@ -4,18 +4,23 @@
         <header class="ink-header">
             <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
                 <h1 class="text-2xl sm:text-3xl ink-heading flex items-center gap-2 ink-brushstroke">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
-                    </svg>
+<!--                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">-->
+<!--                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>-->
+<!--                    </svg>-->
+                    <Link :href="route('dashboard')">
+                        <ApplicationLogo
+                            class="block h-9 w-auto fill-current text-gray-800"
+                        />
+                    </Link>
                     熊猫韵律
                 </h1>
                 <Link
                     :href="route('posts.create')"
                     class="ink-button text-sm"
                 >
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-                    </svg>
+<!--                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">-->
+<!--                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>-->
+<!--                    </svg>-->
                     发布
                 </Link>
             </div>
@@ -68,6 +73,7 @@
 
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3'
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 defineProps({ posts: Array })
 
 const user = usePage().props.auth?.user
