@@ -1,0 +1,36 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rice paper background -->
+  <rect width="200" height="200" fill="#faf8f2"/>
+  
+  <!-- Ink-style border -->
+  <rect x="10" y="10" width="180" height="180" fill="none" stroke="#8b7355" stroke-width="3" opacity="0.8"/>
+  
+  <!-- Panda ears -->
+  <circle cx="60" cy="60" r="25" fill="#2a2a2a"/>
+  <circle cx="140" cy="60" r="25" fill="#2a2a2a"/>
+  
+  <!-- Panda head -->
+  <circle cx="100" cy="100" r="50" fill="#f5f5f5" stroke="#2a2a2a" stroke-width="2"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="85" cy="85" rx="12" ry="15" fill="#2a2a2a"/>
+  <ellipse cx="115" cy="85" rx="12" ry="15" fill="#2a2a2a"/>
+  
+  <!-- Winking effect - smaller right eye -->
+  <ellipse cx="115" cy="88" rx="8" ry="4" fill="#2a2a2a"/>
+  
+  <!-- Eye highlights -->
+  <circle cx="82" cy="82" r="3" fill="white"/>
+  <ellipse cx="115" cy="86" rx="2" ry="1" fill="white"/>
+  
+  <!-- Nose -->
+  <ellipse cx="100" cy="105" rx="4" ry="3" fill="#2a2a2a"/>
+  
+  <!-- Mouth -->
+  <path d="M 95 115 Q 100 120 105 115" fill="none" stroke="#2a2a2a" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Ink decoration around -->
+  <circle cx="30" cy="170" r="8" fill="#8b7355" opacity="0.3"/>
+  <circle cx="170" cy="30" r="6" fill="#8b7355" opacity="0.4"/>
+  <circle cx="180" cy="160" r="4" fill="#8b7355" opacity="0.5"/>
+</svg>
