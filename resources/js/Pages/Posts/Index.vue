@@ -14,15 +14,25 @@
                     </Link>
                     熊猫韵律
                 </h1>
-                <Link
-                    :href="route('posts.create')"
-                    class="ink-button text-sm"
-                >
+                <div class="flex items-center gap-4">
+                    <Link
+                        :href="route('posts.create')"
+                        class="ink-button text-sm"
+                    >
 <!--                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">-->
 <!--                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>-->
 <!--                    </svg>-->
-                    发布
-                </Link>
+                        发布
+                    </Link>
+                    <UserDropdown v-if="user" :user="user" />
+                    <Link
+                        v-else
+                        :href="route('login')"
+                        class="ink-button text-sm bg-gray-50 border border-gray-200"
+                    >
+                        登录
+                    </Link>
+                </div>
             </div>
         </header>
         <!-- Main Content -->
@@ -74,6 +84,7 @@
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3'
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import UserDropdown from "@/Shared/UserDropdown.vue";
 defineProps({ posts: Array })
 
 const user = usePage().props.auth?.user
