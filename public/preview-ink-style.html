@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink Painting Style Preview - 熊猫韵律</title>
+    
+    <!-- Chinese Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Zhi+Mang+Xing&family=Liu+Jian+Mao+Cao&family=Noto+Serif+SC:wght@400;500;600;700&family=Song+Myung&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/build/assets/app-jNiKRav0.css">
+    
+    <style>
+        /* Inline fallback styles for preview */
+        body {
+            background-color: #faf8f2;
+            font-family: 'Noto Serif SC', serif;
+            color: #5a5a5a;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body class="ink-body">
+    <div class="ink-page">
+        <!-- Header -->
+        <header class="ink-header">
+            <div style="max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem;">
+                <h1 class="ink-heading" style="font-size: 1.875rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <svg style="width: 1.75rem; height: 1.75rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+                    </svg>
+                    熊猫韵律
+                </h1>
+                <button class="ink-button" style="font-size: 0.875rem;">
+                    <svg style="width: 1rem; height: 1rem; margin-right: 0.25rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    发布
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main style="max-width: 1280px; margin: 0 auto; padding: 2.5rem 1rem;">
+            <!-- Sample Posts -->
+            <div class="ink-post ink-splash">
+                <div style="display: flex; align-items: center; justify-content: between; margin-bottom: 1rem;">
+                    <div>
+                        <h2 class="ink-heading ink-link" style="font-size: 1.125rem; font-weight: 600;">
+                            古诗词中的山水之美
+                        </h2>
+                        <span class="ink-comment-meta">by 李白</span>
+                    </div>
+                </div>
+                <article class="ink-body">
+                    <pre class="whitespace-pre-wrap font-serif">山不在高，有仙则名。水不在深，有龙则灵。斯是陋室，惟吾德馨。苔痕上阶绿，草色入帘青。谈笑有鸿儒，往来无白丁。可以调素琴，阅金经。无丝竹之乱耳，无案牍之劳形。南阳诸葛庐，西蜀子云亭。孔子云：何陋之有？</pre>
+                </article>
+            </div>
+
+            <div class="ink-post">
+                <div style="display: flex; align-items: center; justify-content: between; margin-bottom: 1rem;">
+                    <div>
+                        <h2 class="ink-heading ink-link" style="font-size: 1.125rem; font-weight: 600;">
+                            水墨画的韵味与技法
+                        </h2>
+                        <span class="ink-comment-meta">by 吴道子</span>
+                    </div>
+                </div>
+                <article class="ink-body">
+                    <pre class="whitespace-pre-wrap font-serif">水墨画以其独特的韵味和技法，在中国绘画史上占有重要地位。它以水与墨的浓淡变化，表现出丰富的层次感和意境。通过留白和虚实结合，营造出诗意的空间感受。</pre>
+                </article>
+            </div>
+
+            <!-- Comments Section Preview -->
+            <div class="ink-container" style="margin-top: 2rem; padding: 2rem;">
+                <h3 class="ink-heading ink-brushstroke" style="font-size: 1.125rem; margin-bottom: 1rem;">评论</h3>
+                
+                <form style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem; align-items: stretch;">
+                    <input class="ink-input" placeholder="添加评论…" style="flex: 1;">
+                    <button type="submit" class="ink-button">发布</button>
+                </form>
+
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div class="ink-comment">
+                        <div class="ink-comment-meta">
+                            <span class="ink-comment-author">王羲之</span>
+                            <span style="font-size: 0.75rem;">2小时前</span>
+                        </div>
+                        <div class="ink-comment-content">这篇文章写得很有韵味，让人仿佛置身于山水之间。水墨画的意境确实需要细细品味。</div>
+                        <div class="ink-comment-actions">
+                            <a href="#" class="ink-comment-action">回复</a>
+                            <a href="#" class="ink-comment-action">点赞</a>
+                        </div>
+                    </div>
+
+                    <div class="ink-comment">
+                        <div class="ink-comment-meta">
+                            <span class="ink-comment-author">苏轼</span>
+                            <span style="font-size: 0.75rem;">1小时前</span>
+                        </div>
+                        <div class="ink-comment-content">古人云："诗中有画，画中有诗"，水墨画正是这种境界的完美体现。</div>
+                        <div class="ink-comment-actions">
+                            <a href="#" class="ink-comment-action">回复</a>
+                            <a href="#" class="ink-comment-action">点赞</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

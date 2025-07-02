@@ -1,19 +1,19 @@
 <template>
-    <div class="min-h-screen bg-gray-100">
-        <div class="max-w-2xl mx-auto mt-12 mb-16 bg-white rounded-lg shadow border border-gray-200 p-8">
+    <div class="ink-page">
+        <div class="max-w-2xl mx-auto mt-12 mb-16 ink-container p-8">
             <!-- Post header -->
             <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl font-bold text-gray-900 break-words">{{ post.title }}</h1>
-                <Link :href="route('posts.index')" class="text-gray-500 hover:text-gray-900 underline text-sm">返回</Link>
+                <h1 class="text-3xl font-bold ink-heading break-words ink-brushstroke">{{ post.title }}</h1>
+                <Link :href="route('posts.index')" class="ink-link text-sm">返回</Link>
             </div>
-            <div class="mb-5 text-gray-400 text-sm flex items-center gap-4">
+            <div class="mb-5 ink-comment-meta flex items-center gap-4">
                 <span>作者：{{ post.author }}</span>
                 <span>发布者：{{ post.user.name }}</span>
                 <span>·</span>
                 <span>{{ new Date(post.created_at).toLocaleDateString() }}</span>
             </div>
-            <article class="prose max-w-none text-gray-800">
-               <pre>{{post.content}}</pre>
+            <article class="ink-body">
+               <pre class="whitespace-pre-wrap font-serif">{{post.content}}</pre>
             </article>
             <div v-if="user && post.user && user.id === post.user.id" class="mt-8 flex gap-4">
                 <Link

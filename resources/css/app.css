@@ -1,3 +1,6 @@
+/* Import ink painting styles */
+@import './ink.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
