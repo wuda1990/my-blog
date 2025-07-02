@@ -7,17 +7,19 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect('/posts');
 });
-Route::resource('posts', PostController::class);
-Route::post("comments", [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
-Route::put("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'update'])->name('comments.update');
-Route::delete("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
+
+// 为 posts 资源路由添加 auth 中间件，除了 index 方法
+Route::resource('posts', PostController::class)->except(['index'])->middleware('auth');
+// 单独定义 index 路由不带中间件
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post("comments", [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
+    Route::put("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'update'])->name('comments.update');
+    Route::delete("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
