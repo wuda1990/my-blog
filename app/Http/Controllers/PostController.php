@@ -11,7 +11,12 @@ class PostController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('Posts/Index', [
-            'posts' => Post::orderBy('created_at', 'desc')->get()
+            'posts' => Post::orderBy('created_at', 'desc')
+                ->with('user')
+                ->with(['comments' => function ($query) {
+                    $query->latest()->with('user')->limit(5);
+                }])
+                ->get()
         ]);
     }
 
@@ -24,17 +29,19 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
             'content' => 'required',
-            'author' => 'required|string|max:100',
         ]);
+        $validated['user_id'] = auth()->id();
         Post::create($validated);
         return redirect()->route('posts.index');
     }
 
     public function show(Post $post)
     {
+        $post = Post::with('comments.user')->with('user')->findOrFail($post->id);
         return Inertia::render('Posts/Show', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 
@@ -49,9 +56,10 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
             'content' => 'required',
-            'author' => 'required|string|max:100',
         ]);
+        $validated['user_id'] = auth()->id();
         $post->update($validated);
         return redirect()->route('posts.index');
     }

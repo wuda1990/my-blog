@@ -1,0 +1,292 @@
+/* Ancient Ink Painting (水墨画) Visual Style */
+
+/* Color palette - off-white, faded ink-black, earth tones */
+:root {
+  --ink-paper: #faf8f2;
+  --ink-black: #2a2a2a;
+  --ink-gray: #5a5a5a;
+  --ink-light-gray: #8a8a8a;
+  --ink-earth: #8b7355;
+  --ink-earth-light: #a8956b;
+  --ink-border: #d4c4a0;
+  --ink-shadow: rgba(42, 42, 42, 0.1);
+  --ink-splash: rgba(42, 42, 42, 0.05);
+}
+
+/* Rice paper background */
+body {
+  background-color: var(--ink-paper);
+  background-image: url('/images/rice-paper-texture.png');
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
+/* Typography - Chinese calligraphy and serif fonts */
+.ink-heading {
+  font-family: 'Ma Shan Zheng', 'Zhi Mang Xing', 'Liu Jian Mao Cao', cursive;
+  color: var(--ink-black);
+  text-shadow: 1px 1px 2px var(--ink-shadow);
+}
+
+.ink-body {
+  font-family: 'Noto Serif SC', 'Song Myung', serif;
+  color: var(--ink-gray);
+  line-height: 1.7;
+}
+
+/* Ink-style containers with brushstroke borders */
+.ink-container {
+  background: linear-gradient(135deg, var(--ink-paper) 0%, #f5f3ed 100%);
+  border: 2px solid var(--ink-border);
+  border-radius: 8px;
+  box-shadow: 
+    0 4px 8px var(--ink-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.ink-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--ink-border), var(--ink-earth-light), var(--ink-border));
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* Ink splash decorative elements */
+.ink-splash::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background-image: url('/images/ink-splash.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Post styling with ink aesthetics */
+.ink-post {
+  background: linear-gradient(135deg, var(--ink-paper) 0%, #f8f6f0 100%);
+  border: 1px solid var(--ink-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 
+    0 2px 8px var(--ink-shadow),
+    0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.ink-post:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 16px var(--ink-shadow),
+    0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  border-color: var(--ink-earth);
+}
+
+.ink-post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ink-earth), var(--ink-earth-light), var(--ink-earth));
+  border-radius: 12px 12px 0 0;
+  opacity: 0.6;
+}
+
+/* Header styling */
+.ink-header {
+  background: linear-gradient(135deg, #fdfbf7 0%, var(--ink-paper) 100%);
+  border-bottom: 2px solid var(--ink-border);
+  box-shadow: 0 2px 8px var(--ink-shadow);
+}
+
+/* Comment section with Reddit-like layout but ink aesthetics */
+.ink-comment {
+  background: linear-gradient(135deg, #fcfaf6 0%, #f9f7f1 100%);
+  border: 1px solid var(--ink-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.ink-comment:hover {
+  border-color: var(--ink-earth-light);
+  box-shadow: 0 2px 6px var(--ink-shadow);
+}
+
+.ink-comment::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--ink-earth), var(--ink-earth-light));
+  border-radius: 0 0 0 8px;
+}
+
+.ink-comment-meta {
+  color: var(--ink-light-gray);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ink-comment-author {
+  color: var(--ink-earth);
+  font-weight: 600;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.ink-comment-content {
+  color: var(--ink-gray);
+  line-height: 1.6;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.ink-comment-actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.ink-comment-action {
+  color: var(--ink-light-gray);
+  font-size: 0.75rem;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.ink-comment-action:hover {
+  color: var(--ink-earth);
+  background: var(--ink-splash);
+}
+
+/* Form elements with ink styling */
+.ink-input {
+  background: #fdfbf7;
+  border: 1px solid var(--ink-border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-family: 'Noto Serif SC', serif;
+  color: var(--ink-gray);
+  transition: all 0.2s ease;
+}
+
+.ink-input:focus {
+  outline: none;
+  border-color: var(--ink-earth);
+  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.2);
+}
+
+.ink-button {
+  background: linear-gradient(135deg, var(--ink-earth) 0%, var(--ink-earth-light) 100%);
+  color: var(--ink-paper);
+  border: 1px solid var(--ink-earth);
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.ink-button:hover {
+  background: linear-gradient(135deg, var(--ink-earth-light) 0%, var(--ink-earth) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px var(--ink-shadow);
+}
+
+.ink-button:active {
+  transform: translateY(0);
+}
+
+/* Brushstroke decorative elements */
+.ink-brushstroke {
+  position: relative;
+}
+
+.ink-brushstroke::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--ink-earth) 20%, var(--ink-earth-light) 50%, var(--ink-earth) 80%, transparent 100%);
+  opacity: 0.6;
+  border-radius: 1px;
+}
+
+/* Main page background override */
+.ink-page {
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* Navigation and links */
+.ink-link {
+  color: var(--ink-earth);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.ink-link:hover {
+  color: var(--ink-black);
+}
+
+.ink-link:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ink-earth);
+  animation: ink-underline 0.3s ease-in-out;
+}
+
+@keyframes ink-underline {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ink-container {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+  
+  .ink-post {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .ink-heading {
+    font-size: 1.5rem;
+  }
+}
