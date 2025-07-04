@@ -2,6 +2,7 @@
     <div class="ink-page">
         <!-- Header -->
         <header class="ink-header">
+            <meta name="description" content="这是一家专注于古诗文的网站，提供丰富的古代诗歌和文学作品。">
             <div class="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
                 <h1 class="text-2xl sm:text-3xl ink-heading flex items-center gap-2 ink-brushstroke">
 <!--                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">-->
@@ -51,7 +52,7 @@
                             >
                                 {{ post.title }}
                             </Link>
-                            <span class="ml-3 text-xs ink-comment-meta">by {{ post.user.name }}</span>
+                            <span class="ml-3 text-xs ink-comment-meta">{{post.author}}</span>
                         </div>
                         <div v-if="user && post.user && user.id === post.user.id" class="flex gap-2">
                             <Link
