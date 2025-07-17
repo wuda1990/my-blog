@@ -30,8 +30,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment, Authenticatable $user)
     {
-        //
-        $this->authorize('update', $comment);
+        // Ensure the authenticated user is the owner of the comment
+        if ($comment->user_id !== $user->getAuthIdentifier()) {
+            abort(403, 'Unauthorized action.');
+        }
         $data = $request->validate([
             'content' => 'required|string|max:1000',
         ]);
@@ -44,7 +46,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment,Authenticatable $user)
     {
-        $this->authorize('delete', $comment);
+        // Ensure the authenticated user is the owner of the comment
+        if ($comment->user_id !== $user->getAuthIdentifier()) {
+            abort(403, 'Unauthorized action.');
+        }
         $comment->delete();
         return redirect()->back();
     }
