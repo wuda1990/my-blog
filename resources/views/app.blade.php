@@ -35,6 +35,10 @@
                      class="w-5 h-5 object-contain inline-block align-middle">
 
                 <!-- 备案链接 -->
+                <a href="https://beian.miit.gov.cn/" rel="noreferrer" target="_blank"
+                   class="hover:text-gray-900 transition-colors duration-200">
+                    沪ICP备2025132458号-1
+                </a>
                 <a href="https://beian.mps.gov.cn/#/query/webSearch?code=31010602009089"
                    rel="noreferrer"
                    target="_blank"
