@@ -25,4 +25,24 @@
           style="background-color: #faf8f2; background-image: url('/images/rice-paper-texture.png'); background-size: 400px 400px; background-repeat: repeat; background-attachment: fixed;">
         @inertia
     </body>
+    <!-- 备案信息区域 -->
+    <footer class="py-3 bg-gray-50 border-t border-gray-200 mt-auto">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center gap-2 text-gray-600 text-sm">
+                <!-- 备案图标 -->
+                <img src="{{ asset('images/beian.png') }}"
+                     alt="备案图标"
+                     class="w-5 h-5 object-contain inline-block align-middle">
+
+                <!-- 备案链接 -->
+                <a href="https://beian.mps.gov.cn/#/query/webSearch?code=31010602009089"
+                   rel="noreferrer"
+                   target="_blank"
+                   class="hover:text-gray-900 transition-colors duration-200">
+                    沪公网安备31010602009089号
+                </a>
+            </div>
+        </div>
+    </footer>
+
 </html>
