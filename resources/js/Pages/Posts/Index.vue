@@ -40,7 +40,7 @@
         <main class="max-w-5xl mx-auto px-4 py-10">
             <ul>
                 <li
-                    v-for="post in posts"
+                    v-for="post in posts.data"
                     :key="post.id"
                     class="ink-post ink-splash"
                 >
@@ -72,12 +72,15 @@
                         <pre class="whitespace-pre-wrap font-serif">{{post.content}}</pre>
                     </article>
                 </li>
-                <li v-if="!posts.length" class="text-center py-16">
+                <li v-if="!posts.data.length" class="text-center py-16">
                     <div class="ink-container p-8">
                         <p class="ink-body text-lg">还没有文章，快来发布第一篇吧！</p>
                     </div>
                 </li>
             </ul>
+            
+            <!-- Pagination Component -->
+            <Pagination :pagination="posts" />
         </main>
     </div>
 </template>
@@ -86,7 +89,13 @@
 import { Link, router, usePage } from '@inertiajs/vue3'
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import UserDropdown from "@/Shared/UserDropdown.vue";
-defineProps({ posts: Array })
+import Pagination from "@/Components/Pagination.vue";
+defineProps({ 
+    posts: {
+        type: Object,
+        required: true
+    }
+})
 
 const user = usePage().props.auth?.user
 
