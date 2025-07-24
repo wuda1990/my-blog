@@ -12,8 +12,8 @@ Route::get('/', function () {
 
 // 为 posts 资源路由添加 auth 中间件，除了 index 方法
 Route::resource('posts', PostController::class)->except(['index'])->middleware('auth');
-// 单独定义 index 路由不带中间件
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+// 单独定义 index 路由，添加 verified 中间件
+Route::get('posts', [PostController::class, 'index'])->name('posts.index')->middleware(['auth', 'verified']);
 
 Route::middleware(['auth'])->group(function () {
     Route::post("comments", [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
