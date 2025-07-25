@@ -8,7 +8,7 @@
 <!--                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">-->
 <!--                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>-->
 <!--                    </svg>-->
-                    <Link :href="route('dashboard')">
+                    <Link :href="route('posts.index')">
                         <ApplicationLogo
                             class="block h-9 w-auto fill-current text-gray-800"
                         />
