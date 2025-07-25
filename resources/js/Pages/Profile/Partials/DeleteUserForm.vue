@@ -42,17 +42,16 @@ const closeModal = () => {
     <section class="space-y-6">
         <header>
             <h2 class="text-lg font-medium text-gray-900">
-                Delete Account
+                删除账户
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Once your account is deleted, all of its resources and data will
-                be permanently deleted. Before deleting your account, please
-                download any data or information that you wish to retain.
+                一旦您的帐户被删除，其所有资源和数据将被删除
+                永久删除。请删除您的帐户 下载您希望保留的任何数据或信息。
             </p>
         </header>
 
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
+        <DangerButton @click="confirmUserDeletion">删除账户</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="p-6">
@@ -99,7 +98,7 @@ const closeModal = () => {
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
-                        Delete Account
+                        删除账户
                     </DangerButton>
                 </div>
             </div>

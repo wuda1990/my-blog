@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -71,5 +71,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new RhythmVerifyEmail());
     }
 }
