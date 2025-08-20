@@ -16,7 +16,7 @@ class PostController extends Controller
                 ->with(['comments' => function ($query) {
                     $query->latest()->with('user')->limit(5);
                 }])
-                ->get()
+                ->paginate(10)
         ]);
     }
 
