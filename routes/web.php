@@ -19,6 +19,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post("comments", [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
     Route::put("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'update'])->name('comments.update');
     Route::delete("comments/{comment}", [\App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
+    
+    // 文件相关路由
+    Route::post("posts/{post}/files", [\App\Http\Controllers\FileController::class, 'store'])->name('files.store');
+    Route::delete("files/{file}", [\App\Http\Controllers\FileController::class, 'destroy'])->name('files.destroy');
+    Route::get("files/{file}/download", [\App\Http\Controllers\FileController::class, 'download'])->name('files.download');
 });
 
 Route::get('/dashboard', function () {

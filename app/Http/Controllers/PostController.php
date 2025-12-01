@@ -33,7 +33,7 @@ class PostController extends Controller
             'content' => 'required',
         ]);
         $validated['user_id'] = auth()->id();
-        Post::create($validated);
+        $post = Post::create($validated);
         return redirect()->route('posts.index');
     }
 
@@ -47,6 +47,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $post->load('files');
         return Inertia::render('Posts/Edit', [
             'post' => $post
         ]);
