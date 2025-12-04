@@ -89,33 +89,48 @@ const form = useForm({
 const files = ref([])
 
 function handleFileUpload(event) {
+    console.log('文件选择事件触发')
     files.value = [...event.target.files]
+    console.log('选择的文件:', files.value)
     // 立即上传文件
     uploadFiles()
 }
 
 function uploadFiles() {
-    if (files.value.length === 0) return
+    console.log('uploadFiles函数被调用')
+    if (files.value.length === 0) {
+        console.log('没有要上传的文件')
+        return
+    }
     
-    const formData = new FormData()
+    console.log('props.post.id:', props.post.id)
+    console.log('要上传的文件数量:', files.value.length)
+    
+    // 使用绝对URL而不是route函数
+    const url = `/posts/${props.post.id}/files`
+    console.log('文件上传URL:', url)
+    
+    // 遍历文件，为每个文件创建一个独立的FormData
     files.value.forEach(file => {
+        console.log('准备上传文件:', file.name)
+        const formData = new FormData()
         formData.append('file', file)
-    })
-    
-    fetch(route('files.store', props.post.id), {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        // 重新加载页面以显示新上传的文件
-        window.location.reload()
-    })
-    .catch(error => {
-        console.error('文件上传失败:', error)
+        
+        // 使用Inertia的axios实例来处理请求，这样可以自动处理CSRF令牌
+        window.axios.post(url, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(response => {
+            console.log('文件上传成功:', response.data)
+            // 重新加载页面以显示新上传的文件
+            window.location.reload()
+        })
+        .catch(error => {
+            console.error('文件上传失败:', error)
+            console.error('错误详情:', error.response?.data)
+        })
     })
 }
 

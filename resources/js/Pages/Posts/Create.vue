@@ -26,15 +26,6 @@
                               class="w-full ink-input"
                               required></textarea>
                 </div>
-                <div class="mb-5">
-                    <label class="block ink-body font-medium mb-1">上传文件</label>
-                    <input type="file" @change="handleFileUpload" multiple
-                           class="w-full ink-input"
-                           accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif">
-                    <div class="mt-2 text-sm text-gray-500">
-                        支持的文件类型：PDF, DOC, DOCX, TXT, JPG, JPEG, PNG, GIF (最大10MB)
-                    </div>
-                </div>
                 <div class="flex items-center gap-4">
                     <button type="submit" class="ink-button">
                         发布
@@ -48,7 +39,6 @@
 
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3'
-import { ref } from 'vue'
 
 const form = useForm({
     title: '',
@@ -56,18 +46,7 @@ const form = useForm({
     content: ''
 })
 
-const files = ref([])
-
-function handleFileUpload(event) {
-    files.value = [...event.target.files]
-}
-
 function submit() {
-    form.post(route('posts.store'), {
-        onSuccess: (response) => {
-            // 文件上传将在文章创建后通过单独的请求处理
-            // 这里可以添加重定向或其他逻辑
-        }
-    })
+    form.post(route('posts.store'))
 }
 </script>

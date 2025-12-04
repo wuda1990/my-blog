@@ -34,7 +34,8 @@ class PostController extends Controller
         ]);
         $validated['user_id'] = auth()->id();
         $post = Post::create($validated);
-        return redirect()->route('posts.index');
+        // 重定向到文章编辑页面，这样就可以在URL中获取到文章ID
+        return redirect()->route('posts.edit', $post);
     }
 
     public function show(Post $post)

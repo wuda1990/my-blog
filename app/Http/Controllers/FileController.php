@@ -12,23 +12,40 @@ class FileController extends Controller
 {
     public function store(Request $request, Post $post)
     {
-        $request->validate([
-            'file' => 'required|file|max:10240', // 10MB limit
-        ]);
-
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
-        $filePath = $file->storeAs('posts/' . $post->id, Str::random(40) . '.' . $file->getClientOriginalExtension(), 'public');
-
-        $fileModel = File::create([
-            'name' => $fileName,
-            'path' => $filePath,
-            'mime_type' => $file->getMimeType(),
-            'size' => $file->getSize(),
+        // 添加日志记录
+        \Log::info('FileController@store called', [
             'post_id' => $post->id,
+            'files' => $request->file('file'),
+            'request_method' => $request->method(),
+            'request_url' => $request->url(),
         ]);
 
-        return response()->json($fileModel);
+        // 验证规则修改为支持数组
+        $request->validate([
+            'file.*' => 'required|file|max:10240', // 10MB limit
+        ]);
+
+        $files = $request->file('file');
+        // 确保files是数组
+        $files = is_array($files) ? $files : [$files];
+        $uploadedFiles = [];
+
+        foreach ($files as $file) {
+            $fileName = $file->getClientOriginalName();
+            $filePath = $file->storeAs('posts/' . $post->id, Str::random(40) . '.' . $file->getClientOriginalExtension(), 'public');
+
+            $fileModel = File::create([
+                'name' => $fileName,
+                'path' => $filePath,
+                'mime_type' => $file->getMimeType(),
+                'size' => $file->getSize(),
+                'post_id' => $post->id,
+            ]);
+
+            $uploadedFiles[] = $fileModel;
+        }
+
+        return response()->json($uploadedFiles);
     }
 
     public function destroy(File $file)
