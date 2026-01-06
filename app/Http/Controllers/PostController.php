@@ -13,6 +13,7 @@ class PostController extends Controller
         return Inertia::render('Posts/Index', [
             'posts' => Post::orderBy('created_at', 'desc')
                 ->with('user')
+                ->with('files')
                 ->with(['comments' => function ($query) {
                     $query->latest()->with('user')->limit(5);
                 }])
@@ -40,7 +41,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $post = Post::with('comments.user')->with('user')->findOrFail($post->id);
+        $post = Post::with('comments.user')->with('user')->with('files')->findOrFail($post->id);
         return Inertia::render('Posts/Show', [
             'post' => $post,
         ]);

@@ -15,6 +15,30 @@
             <article class="ink-body">
                <pre class="whitespace-pre-wrap font-serif">{{post.content}}</pre>
             </article>
+            
+            <!-- 文件列表 -->
+            <div v-if="post.files && post.files.length > 0" class="mt-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">相关文件</h2>
+                <div class="space-y-2">
+                    <div v-for="file in post.files" :key="file.id" class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="text-sm">{{ file.name }}</span>
+                            <span class="text-xs text-gray-500">({{ formatFileSize(file.size) }})</span>
+                            <span class="text-xs text-gray-400">{{ formatDate(file.created_at) }}</span>
+                        </div>
+                        <a :href="route('files.download', file.id)" class="text-sm ink-link flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            下载
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
             <div v-if="user && post.user && user.id === post.user.id" class="mt-8 flex gap-4">
                 <Link
                     :href="route('posts.edit', post.id)"
@@ -132,5 +156,13 @@ function formatDate(str) {
     if (!str) return ''
     const d = new Date(str)
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes'
+    const k = 1024
+    const sizes = ['Bytes', 'KB', 'MB', 'GB']
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
 }
 </script>
