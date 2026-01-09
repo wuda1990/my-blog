@@ -125,17 +125,8 @@ function uploadFiles() {
 
 function deleteFile(file) {
     if (confirm('确定要删除这个文件吗？')) {
-        // 使用Inertia的router.delete方法，自动处理CSRF令牌
-        router.delete(route('files.destroy', file.id), {
-            onSuccess: () => {
-                // 重新加载页面以更新文件列表
-                window.location.reload()
-            },
-            onError: (errors) => {
-                console.error('文件删除失败:', errors)
-                alert('文件删除失败，请重试')
-            }
-        })
+        // 使用Inertia的router.delete方法，自动处理CSRF令牌和页面刷新
+        router.delete(route('files.destroy', file.id))
     }
 }
 

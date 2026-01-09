@@ -21,32 +21,30 @@ class FileController extends Controller
             'request_url' => $request->url(),
         ]);
 
-        // 验证规则修改为支持数组
+        // 验证规则支持单个文件和文件数组
         $request->validate([
-            'file.*' => 'required|file|max:10240', // 10MB limit
+            'file' => 'required|file|max:10240', // 10MB limit
         ]);
 
         $files = $request->file('file');
         // 确保files是数组
         $files = is_array($files) ? $files : [$files];
-        $uploadedFiles = [];
 
         foreach ($files as $file) {
             $fileName = $file->getClientOriginalName();
             $filePath = $file->storeAs('posts/' . $post->id, Str::random(40) . '.' . $file->getClientOriginalExtension(), 'public');
 
-            $fileModel = File::create([
+            File::create([
                 'name' => $fileName,
                 'path' => $filePath,
                 'mime_type' => $file->getMimeType(),
                 'size' => $file->getSize(),
                 'post_id' => $post->id,
             ]);
-
-            $uploadedFiles[] = $fileModel;
         }
 
-        return response()->json($uploadedFiles);
+        // 返回重定向响应，让Inertia处理页面刷新
+        return redirect()->back();
     }
 
     public function destroy(File $file)
@@ -68,13 +66,15 @@ class FileController extends Controller
                 'file_id' => $file->id,
             ]);
 
-            return response()->json(['success' => true]);
+            // 返回重定向响应，让Inertia处理
+            return redirect()->back();
         } catch (\Exception $e) {
             \Log::error('Failed to delete file', [
                 'file_id' => $file->id,
                 'error' => $e->getMessage(),
             ]);
-            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+            // 返回重定向响应，让Inertia处理
+            return redirect()->back()->with('error', '删除文件失败: ' . $e->getMessage());
         }
     }
 
