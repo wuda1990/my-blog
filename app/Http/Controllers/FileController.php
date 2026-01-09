@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -50,10 +51,31 @@ class FileController extends Controller
 
     public function destroy(File $file)
     {
-        Storage::disk('public')->delete($file->path);
-        $file->delete();
+        // 添加日志记录
+        \Log::info('FileController@destroy called', [
+            'file_id' => $file->id,
+            'file_name' => $file->name,
+            'file_path' => $file->path,
+        ]);
 
-        return response()->json(['success' => true]);
+        try {
+            // 删除文件
+            Storage::disk('public')->delete($file->path);
+            // 删除数据库记录
+            $file->delete();
+            
+            \Log::info('File deleted successfully', [
+                'file_id' => $file->id,
+            ]);
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            \Log::error('Failed to delete file', [
+                'file_id' => $file->id,
+                'error' => $e->getMessage(),
+            ]);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function download(File $file)
