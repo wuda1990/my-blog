@@ -119,6 +119,13 @@ function uploadFiles() {
         })
         .catch(error => {
             console.error('文件上传失败:', error)
+            // 显示中文错误信息
+            if (error.response && error.response.data && error.response.data.errors) {
+                const errors = error.response.data.errors
+                alert(Object.values(errors)[0][0])
+            } else {
+                alert('文件上传失败，请重试')
+            }
         })
     })
 }

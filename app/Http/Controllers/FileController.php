@@ -24,6 +24,10 @@ class FileController extends Controller
         // 验证规则支持单个文件和文件数组
         $request->validate([
             'file' => 'required|file|max:10240', // 10MB limit
+        ], [
+            'file.max' => '文件大小不能超过 10MB',
+            'file.required' => '请选择要上传的文件',
+            'file.file' => '请选择有效的文件',
         ]);
 
         $files = $request->file('file');

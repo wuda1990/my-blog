@@ -130,6 +130,17 @@ async function uploadFiles(postId) {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
+        }).catch(error => {
+            console.error('文件上传失败:', error)
+            // 显示中文错误信息
+            if (error.response && error.response.data && error.response.data.errors) {
+                const errors = error.response.data.errors
+                alert(Object.values(errors)[0][0])
+            } else {
+                alert('文件上传失败，请重试')
+            }
+            // 抛出错误，让Promise.all可以捕获
+            throw error
         })
     })
     
